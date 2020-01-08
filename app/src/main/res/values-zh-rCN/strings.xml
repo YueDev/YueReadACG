@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">悦读ACG</string>
+    <string name="lab_news">资讯</string>
+    <string name="lab_discuss">讨论</string>
+    <string name="lab_gallery">妹子图</string>
+    <string name="lab_about">关于悦读</string>
+</resources>

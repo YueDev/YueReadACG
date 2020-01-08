@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/nav_news">
+
+    <fragment
+        android:id="@+id/nav_news"
+        android:label="@string/lab_news"
+        android:name="com.womeiyouyuming.android.yuereadacg.fragment.NewsFragment"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.womeiyouyuming.android.yuereadacg.fragment.GalleryFragment"
+        android:label="@string/lab_gallery"
+        tools:layout="@layout/fragment_gallery" />
+    <fragment
+        android:id="@+id/nav_discuss"
+        android:name="com.womeiyouyuming.android.yuereadacg.fragment.DiscussFragment"
+        android:label="@string/lab_discuss"
+        tools:layout="@layout/fragment_discuss" />
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.womeiyouyuming.android.yuereadacg.fragment.AboutFragment"
+        android:label="@string/lab_about"
+        tools:layout="@layout/fragment_about" />
+</navigation>
