@@ -4,6 +4,8 @@
     <string name="lab_discuss">Discuss</string>
     <string name="lab_gallery">Gallery</string>
     <string name="lab_about">About me</string>
+    <string name="lab_news_home">Home</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

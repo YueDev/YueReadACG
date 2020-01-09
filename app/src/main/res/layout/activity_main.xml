@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +7,18 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
         android:id="@+id/navHosFragment"
@@ -23,10 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:menu="@menu/menu_main"
-        app:labelVisibilityMode="auto"
         android:background="@android:color/white"
-        />
+        app:labelVisibilityMode="auto"
+        app:menu="@menu/menu_main" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
