@@ -27,6 +27,8 @@ class NewsViewModel : ViewModel() {
         val httpResult = newsRepository.getNewsSwipe().string()
         val newsSwipeList = parseNewsSwipeList(httpResult)
 
+        Log.d("YUEDEV", newsSwipeList.toString())
+
         emit(newsSwipeList)
     }
 

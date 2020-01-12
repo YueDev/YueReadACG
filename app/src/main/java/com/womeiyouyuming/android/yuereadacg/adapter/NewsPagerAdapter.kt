@@ -11,5 +11,8 @@ class NewsPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount() = 100
 
-    override fun createFragment(position: Int) = NewsHomeFragment()
+    override fun createFragment(position: Int) = when(position) {
+        0 -> NewsHomeFragment()
+        else -> Fragment()
+    }
 }
