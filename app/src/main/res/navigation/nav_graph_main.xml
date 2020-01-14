@@ -9,7 +9,13 @@
         android:id="@+id/nav_news"
         android:label="@string/lab_news"
         android:name="com.womeiyouyuming.android.yuereadacg.fragment.NewsFragment"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_nav_news_to_nav_news_content"
+            app:destination="@id/nav_news_content"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+    </fragment>
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.womeiyouyuming.android.yuereadacg.fragment.GalleryFragment"
@@ -25,4 +31,13 @@
         android:name="com.womeiyouyuming.android.yuereadacg.fragment.AboutFragment"
         android:label="@string/lab_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/nav_news_content"
+        android:name="com.womeiyouyuming.android.yuereadacg.fragment.news.NewsContentFragment"
+        android:label="@string/lab_news_content"
+        tools:layout="@layout/fragment_news_content">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
 </navigation>

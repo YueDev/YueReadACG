@@ -1,4 +1,4 @@
-package com.womeiyouyuming.android.yuereadacg.Repository
+package com.womeiyouyuming.android.yuereadacg.repository
 
 import com.womeiyouyuming.android.yuereadacg.network.RetrofitClient
 
@@ -12,6 +12,9 @@ class NewsRepository {
     suspend fun getNewsSwipe() = newsServices.getNewsSwipe()
 
     suspend fun getNews(currentTimeMillis: Long) = newsServices.getNews(currentTimeMillis)
+
+    suspend fun getNewsContent(formattedUrl: String) = newsServices.getNewsContent(formattedUrl)
+
 
 
 }

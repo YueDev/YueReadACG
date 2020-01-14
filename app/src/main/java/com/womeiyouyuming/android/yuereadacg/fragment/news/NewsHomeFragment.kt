@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -57,11 +59,15 @@ class NewsHomeFragment : Fragment() {
             addTransformer(ZoomPageTransformer())
         }
 
-        val bannerAdapter = BannerAdapter()
+        val bannerAdapter = BannerAdapter {
+            val bundle = bundleOf(Pair("url", it))
+            findNavController().navigate(R.id.action_nav_news_to_nav_news_content, bundle)
+        }
 
         with(bannerViewPager) {
             setPageTransformer(pageTransformer)
             adapter = bannerAdapter
+
 
             //获取viewpager内部recyclerview，设置padding用来显示多个页面
             (getChildAt(0) as RecyclerView).also {

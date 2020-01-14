@@ -23,14 +23,25 @@ fun parseNewsSwipeList(httpResult: String) = Jsoup.parse(httpResult)
         NewsSwipe(title, url, imgUrl)
     }
 
+
 fun parseNewsList(httpResult: String): List<News> {
     //acg.178给数据会有空数据，因此需要过滤null
-    //有的tags会加","，需要去掉
+    //有的tags会加中英文的两种","，需要去掉，有的tags还是空的或者空格，也需要判断
+    //178的码农水平这么烂吗
     val json = httpResult.substringAfter("var _articles=")
     val type = object : TypeToken<List<News?>>() {}.type
     return Gson().fromJson<List<News?>>(json, type).filterNotNull().map {
-        val tag = it.tags.substringBefore(",")
+        val tag = it.tags.substringBefore(",").substringBefore("，").run {
+            if (isBlank()) "其他" else this
+        }
         it.copy(tags = tag)
     }
+}
+
+
+
+// 178给的url有的带base url，有的不带，另外有的以http开头，所以都要处理
+fun formatUrl(url: String) = url.replace("http://", "https://").let {
+    if (it.startsWith("https://")) it.substringAfter("https://acg.178.com/") else it.substringAfter("/")
 }
 

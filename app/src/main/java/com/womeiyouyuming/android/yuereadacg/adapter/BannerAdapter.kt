@@ -13,7 +13,7 @@ import com.womeiyouyuming.android.yuereadacg.model.NewsSwipe
 /**
  * Created by Yue on 2020/1/10.
  */
-class BannerAdapter : ListAdapter<NewsSwipe, BannerAdapter.BannerHolder>(BannerDiffCallback) {
+class BannerAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<NewsSwipe, BannerAdapter.BannerHolder>(BannerDiffCallback) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerHolder {
@@ -24,7 +24,13 @@ class BannerAdapter : ListAdapter<NewsSwipe, BannerAdapter.BannerHolder>(BannerD
             false
         )
 
-        return BannerHolder(bannerBinding)
+        return BannerHolder(bannerBinding).apply {
+            itemView.setOnClickListener {
+                bannerBinding.newsSwipe?.let {
+                    itemClick(it.url)
+                }
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: BannerHolder, position: Int) {
@@ -40,6 +46,8 @@ class BannerAdapter : ListAdapter<NewsSwipe, BannerAdapter.BannerHolder>(BannerD
 
     class BannerHolder(private val binding: ItemBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+
 
         fun bind(newsSwipe: NewsSwipe) {
             binding.newsSwipe = newsSwipe

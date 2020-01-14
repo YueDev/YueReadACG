@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         //资讯页不显示toolbar
         navController.addOnDestinationChangedListener { _, destination, _ ->
             toolBar.visibility = if (destination.id == R.id.nav_news) View.GONE else View.VISIBLE
+
+            bottomNavView.visibility = if (destination.id == R.id.nav_news_content) View.GONE else View.VISIBLE
+
         }
 
         //nav与tooBar和bottomNavView联动

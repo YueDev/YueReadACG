@@ -2,6 +2,7 @@ package com.womeiyouyuming.android.yuereadacg.network
 
 import okhttp3.ResponseBody
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -17,11 +18,18 @@ import retrofit2.http.Query
 
 interface NewsServices {
 
+    //swipe banner
 
     @GET("m/index.html")
     suspend fun getNewsSwipe(): ResponseBody
 
+
+    //news list
     @GET("api/articles.js")
     suspend fun getNews(@Query("v") currentTimeMillis: Long): ResponseBody
+
+    //news content
+    @GET("{url}")
+    suspend fun getNewsContent(@Path("url") url :String): ResponseBody
 
 }

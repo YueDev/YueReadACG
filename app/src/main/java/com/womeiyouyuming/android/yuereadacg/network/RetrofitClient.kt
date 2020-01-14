@@ -13,4 +13,6 @@ object RetrofitClient {
 
     fun getNewsServices(): NewsServices = newsRetrofit.create(NewsServices::class.java)
 
+
+
 }
