@@ -17,6 +17,9 @@ import androidx.core.view.ViewCompat
  * >> Others <<
  *
  * Created by RubiTree ; On 2019-01-13.
+ *
+ *
+ * 这个返回会出现头部布局，不会解决
  */
 class SuspendedLayout(context: Context?, attrs: AttributeSet?) : LinearLayout(context, attrs), NestedScrollingParent3 {
     private val mParentHelper: NestedScrollingParentHelper = NestedScrollingParentHelper(this)

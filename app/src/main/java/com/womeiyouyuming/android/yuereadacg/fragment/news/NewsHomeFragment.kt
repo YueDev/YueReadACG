@@ -49,44 +49,31 @@ class NewsHomeFragment : Fragment() {
     }
 
 
-
-
-
     private fun initBanner() {
-        val pageTransformer = CompositePageTransformer().apply {
-            //设置页面的间距和缩放效果
-            addTransformer(MarginPageTransformer(10))
-            addTransformer(ZoomPageTransformer())
-        }
+
+    }
+
+
+
+
+//
+//        newsViewModel.newsSwipeListLiveData.observe(viewLifecycleOwner) {
+//            bannerAdapter.submitList(it)
+//        }
+//    }
+
+
+    private fun initNewsRecyclerView() {
 
         val bannerAdapter = BannerAdapter {
             val bundle = bundleOf(Pair("url", it))
             findNavController().navigate(R.id.action_nav_news_to_nav_news_content, bundle)
         }
 
-        with(bannerViewPager) {
-            setPageTransformer(pageTransformer)
-            adapter = bannerAdapter
-
-
-            //获取viewpager内部recyclerview，设置padding用来显示多个页面
-            (getChildAt(0) as RecyclerView).also {
-                it.setPadding(50, 0, 50, 0)
-                it.clipToPadding = false
-            }
+        val newsAdapter = NewsAdapter {
+            val bundle = bundleOf(Pair("url", it))
+            findNavController().navigate(R.id.action_nav_news_to_nav_news_content, bundle)
         }
-
-
-
-        newsViewModel.newsSwipeListLiveData.observe(viewLifecycleOwner) {
-            bannerAdapter.submitList(it)
-        }
-    }
-
-
-    private fun initNewsRecyclerView() {
-
-        val newsAdapter = NewsAdapter()
 
         with(newsRecyclerView) {
             layoutManager = LinearLayoutManager(requireContext())

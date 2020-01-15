@@ -88,4 +88,6 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.12.1'   //html解析
 
 
+    implementation 'com.github.RubiTree:NestedScrollingHistory:1.0.1'
+
 }

@@ -6,16 +6,23 @@ body {
 }
 
 h1 {
-    font-size: 20px;
+    font-size: 22px;
 }
+div.info {
+    color: #F37022;
+    font-size: 18px;
+}
+
 
 span.author {
     display: none;
 }
 
+
 p {
-    font-size: 16px;
+    font-size: 18px;
     color: #444444;
+
 }
 
 img {

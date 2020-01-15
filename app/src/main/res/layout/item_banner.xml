@@ -24,11 +24,12 @@
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
+                android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
+                app:imgUrl="@{newsSwipe.imgUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:imgUrl="@{newsSwipe.imgUrl}"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView

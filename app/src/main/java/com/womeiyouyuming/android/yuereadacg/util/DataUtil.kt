@@ -51,7 +51,7 @@ fun parseNewsContent(httpResult: String): String? {
     val body = Jsoup.parse(httpResult)
         .select("div[class=article-main]")
         .select("div[class=article]").html()
-    val start = "<!doctype html><html><head><meta charset=\"utf-8\"><link href=\"news_content_178acg.css\" rel=\"stylesheet\"></head><body>"
+    val start = "<html><head><meta charset=\"utf-8\"><link href=\"news_content_178acg.css\" rel=\"stylesheet\"></head><body>"
     val end = "</body></html>"
 
     return "$start$body$end"

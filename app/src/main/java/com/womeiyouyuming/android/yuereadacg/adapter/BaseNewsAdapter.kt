@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.womeiyouyuming.android.yuereadacg.R
-import com.womeiyouyuming.android.yuereadacg.databinding.ItemBannerBinding
 import com.womeiyouyuming.android.yuereadacg.databinding.ItemNewsCommonBinding
 import com.womeiyouyuming.android.yuereadacg.databinding.ItemNewsHotBinding
 import com.womeiyouyuming.android.yuereadacg.model.News
@@ -24,7 +23,7 @@ import com.womeiyouyuming.android.yuereadacg.model.News
 
 
 
-abstract class BaseNewsAdapter : ListAdapter<News, BaseNewsAdapter.NewsHolder>(NewsDiffCallback) {
+abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<News, BaseNewsAdapter.NewsHolder>(NewsDiffCallback) {
 
     protected val typeCommon = 0
     protected val typeHot = 1
@@ -34,13 +33,28 @@ abstract class BaseNewsAdapter : ListAdapter<News, BaseNewsAdapter.NewsHolder>(N
 
 
 
-
     final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
         val inflater = LayoutInflater.from(parent.context)
 
         return when (viewType) {
-            typeHot -> NewsHolder(DataBindingUtil.inflate<ItemNewsHotBinding>(inflater, R.layout.item_news_hot, parent, false))
-            else -> NewsHolder(DataBindingUtil.inflate<ItemNewsCommonBinding>(inflater, R.layout.item_news_common, parent, false))
+            typeHot -> {
+                val binding = DataBindingUtil.inflate<ItemNewsHotBinding>(inflater, R.layout.item_news_hot, parent, false)
+                NewsHolder(binding).apply {
+                    itemView.setOnClickListener {
+                        val url = binding.news?.url ?: throw NullPointerException("url is null")
+                        itemClick(url)
+                    }
+                }
+            }
+            else -> {
+                val binding =DataBindingUtil.inflate<ItemNewsCommonBinding>(inflater, R.layout.item_news_common, parent, false)
+                NewsHolder(binding).apply {
+                    itemView.setOnClickListener {
+                        val url = binding.news?.url ?: throw NullPointerException("url is null")
+                        itemClick(url)
+                    }
+                }
+            }
         }
     }
 

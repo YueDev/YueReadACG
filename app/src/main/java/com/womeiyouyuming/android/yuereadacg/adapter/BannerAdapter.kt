@@ -26,9 +26,8 @@ class BannerAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<
 
         return BannerHolder(bannerBinding).apply {
             itemView.setOnClickListener {
-                bannerBinding.newsSwipe?.let {
-                    itemClick(it.url)
-                }
+                val url = bannerBinding.newsSwipe?.url ?: throw NullPointerException("url is null")
+                itemClick(url)
             }
         }
     }
