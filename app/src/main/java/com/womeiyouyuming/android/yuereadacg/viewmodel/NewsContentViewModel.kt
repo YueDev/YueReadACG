@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.womeiyouyuming.android.yuereadacg.repository.NewsRepository
+import com.womeiyouyuming.android.yuereadacg.util.parseNewsContent
 import kotlinx.coroutines.Dispatchers
 
 /**
@@ -19,13 +20,14 @@ class NewsContentViewModel(formattedUrl: String) : ViewModel() {
 
     val newsContentLiveData = liveData(Dispatchers.IO) {
 
-
-
-
         val httpResult = newsRepository.getNewsContent(formattedUrl).string()
-        Log.d("YUEDEV", httpResult)
-        emit(httpResult)
+        val result = parseNewsContent(httpResult)
+
+        Log.d("YUEDEV", result)
+
+        emit(result)
 
     }
+
 
 }

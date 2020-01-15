@@ -39,9 +39,16 @@ fun parseNewsList(httpResult: String): List<News> {
 }
 
 
-
 // 178给的url有的带base url，有的不带，另外有的以http开头，所以都要处理
 fun formatUrl(url: String) = url.replace("http://", "https://").let {
-    if (it.startsWith("https://")) it.substringAfter("https://acg.178.com/") else it.substringAfter("/")
+    if (it.startsWith("https://")) it.substringAfter("https://acg.178.com/") else it.substringAfter(
+        "/"
+    )
 }
+
+
+fun parseNewsContent(httpResult: String) = Jsoup.parse(httpResult)
+        .select("div[class=article-main]")
+        .select("div[class=article]").html()
+
 
