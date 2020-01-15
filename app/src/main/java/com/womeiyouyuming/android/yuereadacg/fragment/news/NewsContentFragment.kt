@@ -45,6 +45,8 @@ class NewsContentFragment : Fragment() {
         }
     }
 
+
+
     private fun initWebView(url: String) {
         val formattedUrl = formatUrl(url)
 
@@ -56,8 +58,10 @@ class NewsContentFragment : Fragment() {
             }
         }
 
+        val innerUrl = "file:///android_asset/"
+
         newsContentViewModel.newsContentLiveData.observe(viewLifecycleOwner) {
-            textView.text = it
+            newsContentWebView.loadDataWithBaseURL(innerUrl, it, "text/html", "UTF-8", null)
         }
 
 

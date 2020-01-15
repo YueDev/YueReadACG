@@ -47,8 +47,14 @@ fun formatUrl(url: String) = url.replace("http://", "https://").let {
 }
 
 
-fun parseNewsContent(httpResult: String) = Jsoup.parse(httpResult)
+fun parseNewsContent(httpResult: String): String? {
+    val body = Jsoup.parse(httpResult)
         .select("div[class=article-main]")
         .select("div[class=article]").html()
+    val start = "<!doctype html><html><head><meta charset=\"utf-8\"><link href=\"news_content_178acg.css\" rel=\"stylesheet\"></head><body>"
+    val end = "</body></html>"
+
+    return "$start$body$end"
+}
 
 
