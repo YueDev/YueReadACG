@@ -18,8 +18,10 @@ import com.womeiyouyuming.android.yuereadacg.R
 import com.womeiyouyuming.android.yuereadacg.adapter.BannerAdapter
 import com.womeiyouyuming.android.yuereadacg.adapter.NewsHomeAdapter
 import com.womeiyouyuming.android.yuereadacg.model.News
+import com.womeiyouyuming.android.yuereadacg.network.NetworkStatus
 import com.womeiyouyuming.android.yuereadacg.util.getEmptyNews
 import com.womeiyouyuming.android.yuereadacg.viewmodel.NewsViewModel
+import kotlinx.android.synthetic.main.error.*
 import kotlinx.android.synthetic.main.fragment_news_home.*
 import kotlinx.coroutines.*
 
@@ -52,11 +54,37 @@ class NewsHomeFragment : Fragment() {
 
         val color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
         swipeRefresh.setColorSchemeColors(color)
+
+
         swipeRefresh.setOnRefreshListener {
             newsViewModel.refresh()
         }
 
+        refreshButton.setOnClickListener {
+            newsViewModel.refresh()
+        }
 
+        newsViewModel.networkStatusLiveData.observe(viewLifecycleOwner) {
+
+
+            when(it) {
+
+                NetworkStatus.LOADING -> {
+                    swipeRefresh.isRefreshing = true
+                    errorLayout.visibility = View.GONE
+                }
+                NetworkStatus.FAILED -> {
+                    swipeRefresh.isRefreshing = false
+                    errorLayout.visibility = View.VISIBLE
+                }
+                NetworkStatus.SUCCESS -> {
+                    swipeRefresh.isRefreshing = false
+                    errorLayout.visibility = View.GONE
+                }
+
+            }
+
+        }
 
     }
 

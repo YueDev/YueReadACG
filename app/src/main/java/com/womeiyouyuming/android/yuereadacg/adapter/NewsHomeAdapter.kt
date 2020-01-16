@@ -104,7 +104,7 @@ class NewsHomeAdapter(
         if (position == 0) return typeHead
 
         return when (getItem(position).tags) {
-            "动画", "漫画" -> typeHot
+            "动画", "漫画", "剧场版" -> typeHot
             else -> typeCommon
         }
     }
