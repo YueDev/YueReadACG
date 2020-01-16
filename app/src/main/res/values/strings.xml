@@ -7,6 +7,8 @@
     <string name="lab_news_home">Home</string>
     <string name="lab_news_content">Yue Read</string>
     <string name="tag_hot">Hot</string>
+    <string name="text_error">Something wrong!</string>
+    <string name="text_refresh">click to refresh</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

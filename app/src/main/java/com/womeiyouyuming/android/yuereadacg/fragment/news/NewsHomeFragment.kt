@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +21,7 @@ import com.womeiyouyuming.android.yuereadacg.model.News
 import com.womeiyouyuming.android.yuereadacg.util.getEmptyNews
 import com.womeiyouyuming.android.yuereadacg.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_news_home.*
+import kotlinx.coroutines.*
 
 /**
  * A simple [Fragment] subclass.
@@ -37,11 +41,24 @@ class NewsHomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+        initRefreshLayout()
         initNewsHomeRecyclerView()
+
 
     }
 
+    private fun initRefreshLayout() {
 
+        val color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
+        swipeRefresh.setColorSchemeColors(color)
+        swipeRefresh.setOnRefreshListener {
+            newsViewModel.refresh()
+        }
+
+
+
+    }
 
 
     private fun initNewsHomeRecyclerView() {
@@ -60,11 +77,13 @@ class NewsHomeFragment : Fragment() {
         with(newsHomeRecyclerView) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = newsHomeAdapter
+
         }
 
         newsViewModel.newsSwipeListLiveData.observe(viewLifecycleOwner) {
-            bannerAdapter.submitList(it)
+                bannerAdapter.submitList(it)
         }
+
 
         newsViewModel.newsListLiveDate.observe(viewLifecycleOwner) {
 

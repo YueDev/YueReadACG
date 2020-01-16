@@ -18,12 +18,12 @@ class NewsContentViewModel(formattedUrl: String) : ViewModel() {
 
 
 
+
     val newsContentLiveData = liveData(Dispatchers.IO) {
 
         val httpResult = newsRepository.getNewsContent(formattedUrl).string()
         val result = parseNewsContent(httpResult)
 
-        Log.d("YUEDEV", result)
 
         emit(result)
 

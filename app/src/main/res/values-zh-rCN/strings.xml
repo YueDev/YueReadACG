@@ -8,4 +8,6 @@
     <string name="lab_news_home">首页</string>
     <string name="lab_news_content">悦读</string>
     <string name="tag_hot">热门</string>
+    <string name="text_error">似乎出了点问题</string>
+    <string name="text_refresh">重新加载</string>
 </resources>

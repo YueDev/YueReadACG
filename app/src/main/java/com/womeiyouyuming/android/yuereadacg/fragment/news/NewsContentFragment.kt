@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_news_content.*
  * 资讯的详细内容页
  *
  */
+
 class NewsContentFragment : Fragment() {
 
 
