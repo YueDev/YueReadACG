@@ -5,15 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".fragment.news.NewsHomeFragment">
 
 
 
 
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/newsRecyclerView"
+            android:id="@+id/newsHomeRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />

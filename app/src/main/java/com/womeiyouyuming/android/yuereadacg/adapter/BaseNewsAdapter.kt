@@ -28,9 +28,7 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : L
     protected val typeCommon = 0
     protected val typeHot = 1
 
-
     abstract override fun getItemViewType(position: Int): Int
-
 
 
     final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
@@ -59,7 +57,6 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : L
     }
 
 
-
     final override fun onBindViewHolder(holder: NewsHolder, position: Int) {
 
         when (getItemViewType(position)) {
@@ -70,13 +67,6 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : L
 
 
 
-
-
-    object NewsDiffCallback : DiffUtil.ItemCallback<News>() {
-        override fun areItemsTheSame(oldItem: News, newItem: News) = oldItem == newItem
-
-        override fun areContentsTheSame(oldItem: News, newItem: News) = oldItem == newItem
-    }
 
     class NewsHolder : RecyclerView.ViewHolder {
 
@@ -101,4 +91,13 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : L
         }
 
     }
+}
+
+
+
+
+object NewsDiffCallback : DiffUtil.ItemCallback<News>() {
+    override fun areItemsTheSame(oldItem: News, newItem: News) = oldItem == newItem
+
+    override fun areContentsTheSame(oldItem: News, newItem: News) = oldItem == newItem
 }

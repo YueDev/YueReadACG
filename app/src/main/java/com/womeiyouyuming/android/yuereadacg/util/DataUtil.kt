@@ -58,3 +58,7 @@ fun parseNewsContent(httpResult: String): String? {
 }
 
 
+
+fun getEmptyNews() = News("", "", "", "", "", "")
+
+
