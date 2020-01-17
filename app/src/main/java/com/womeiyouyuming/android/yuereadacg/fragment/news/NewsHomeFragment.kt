@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
@@ -64,21 +65,40 @@ class NewsHomeFragment : Fragment() {
             newsViewModel.refresh()
         }
 
+
+
+
         newsViewModel.networkStatusLiveData.observe(viewLifecycleOwner) {
 
 
             when(it) {
 
                 NetworkStatus.LOADING -> {
+                    refreshButton.visibility = View.GONE
+                    progressBar.visibility = View.VISIBLE
                     swipeRefresh.isRefreshing = true
-                    errorLayout.visibility = View.GONE
                 }
                 NetworkStatus.FAILED -> {
                     swipeRefresh.isRefreshing = false
-                    errorLayout.visibility = View.VISIBLE
+
+                    refreshButton.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
+
+                    newsViewModel.newsListLiveDate.value?.let {
+                        Toast.makeText(requireContext(), R.string.text_error, Toast.LENGTH_SHORT).show()
+                        errorLayout.visibility = View.GONE
+                    } ?: let {
+                        errorLayout.visibility = View.VISIBLE
+                    }
+
                 }
                 NetworkStatus.SUCCESS -> {
                     swipeRefresh.isRefreshing = false
+
+                    refreshButton.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
+
+
                     errorLayout.visibility = View.GONE
                 }
 
