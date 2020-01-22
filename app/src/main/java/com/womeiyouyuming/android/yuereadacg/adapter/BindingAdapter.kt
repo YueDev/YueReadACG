@@ -11,7 +11,7 @@ import com.womeiyouyuming.android.yuereadacg.R
 @BindingAdapter("app:imgUrl")
 fun getImgFromUrl(imageView: ImageView, url: String?) {
 
-    Glide.with(imageView).load(url).into(imageView)
+    Glide.with(imageView).load(url).placeholder(R.drawable.ic_placeholder).into(imageView)
 
 
 }
