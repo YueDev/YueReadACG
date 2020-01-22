@@ -1,10 +1,11 @@
 package com.womeiyouyuming.android.yuereadacg.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.womeiyouyuming.android.yuereadacg.R
 import com.womeiyouyuming.android.yuereadacg.databinding.ItemNewsCommonBinding
@@ -19,11 +20,8 @@ import com.womeiyouyuming.android.yuereadacg.model.News
  */
 
 
-
-
-
-
-abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<News, BaseNewsAdapter.NewsHolder>(NewsDiffCallback) {
+abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) :
+    PagedListAdapter<News, BaseNewsAdapter.NewsHolder>(NewsDiffCallback) {
 
     protected val typeCommon = 0
     protected val typeHot = 1
@@ -36,7 +34,12 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : L
 
         return when (viewType) {
             typeHot -> {
-                val binding = DataBindingUtil.inflate<ItemNewsHotBinding>(inflater, R.layout.item_news_hot, parent, false)
+                val binding = DataBindingUtil.inflate<ItemNewsHotBinding>(
+                    inflater,
+                    R.layout.item_news_hot,
+                    parent,
+                    false
+                )
                 NewsHolder(binding).apply {
                     itemView.setOnClickListener {
                         val url = binding.news?.url ?: throw NullPointerException("url is null")
@@ -45,7 +48,12 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : L
                 }
             }
             else -> {
-                val binding =DataBindingUtil.inflate<ItemNewsCommonBinding>(inflater, R.layout.item_news_common, parent, false)
+                val binding = DataBindingUtil.inflate<ItemNewsCommonBinding>(
+                    inflater,
+                    R.layout.item_news_common,
+                    parent,
+                    false
+                )
                 NewsHolder(binding).apply {
                     itemView.setOnClickListener {
                         val url = binding.news?.url ?: throw NullPointerException("url is null")
@@ -66,8 +74,6 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : L
     }
 
 
-
-
     class NewsHolder : RecyclerView.ViewHolder {
 
 
@@ -82,18 +88,24 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) : L
             this.itemNewsHotBinding = itemNewsHotBinding
         }
 
-        fun bindCommon(news: News) {
-            itemNewsCommonBinding.news = news
+        fun bindCommon(news: News?) {
+
+            news?.let {
+                itemNewsCommonBinding.news = news
+            }
+
         }
 
-        fun bindHot(news: News) {
-            itemNewsHotBinding.news = news
+
+        fun bindHot(news: News?) {
+
+            news?.let {
+                itemNewsHotBinding.news = news
+            }
         }
 
     }
 }
-
-
 
 
 object NewsDiffCallback : DiffUtil.ItemCallback<News>() {

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
 import com.womeiyouyuming.android.yuereadacg.R
 import com.womeiyouyuming.android.yuereadacg.adapter.NewsPagerAdapter
+import com.womeiyouyuming.android.yuereadacg.util.NEWS_PAGE_LIST
 import kotlinx.android.synthetic.main.fragment_news.*
 
 /**
@@ -32,10 +33,7 @@ class NewsFragment : Fragment() {
         var i = 1
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            when (position) {
-                0 -> tab.text = resources.getString(R.string.lab_news_home)
-                else -> tab.text = "标签${i++}"
-            }
+            tab.text = NEWS_PAGE_LIST[position]
         }.attach()
 
 

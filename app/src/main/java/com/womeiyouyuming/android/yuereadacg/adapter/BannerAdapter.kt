@@ -54,4 +54,5 @@ class BannerAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<
 
     }
 
+
 }

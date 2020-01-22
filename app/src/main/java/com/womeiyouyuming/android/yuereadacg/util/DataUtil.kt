@@ -11,6 +11,11 @@ import org.jsoup.Jsoup
  * Created by Yue on 2020/1/9.Swipe
  */
 
+
+val NEWS_PAGE_LIST = listOf("首页", "动漫情报", "展会活动", "萌周边", "万事屋", "游戏宅", "八卦谈")
+
+
+
 fun parseNewsSwipeList(httpResult: String) = Jsoup.parse(httpResult)
     .select("div[class=banner]>div[class=swiper-wrapper]>div[class=swiper-slide]").map {
 

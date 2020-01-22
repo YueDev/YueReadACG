@@ -9,7 +9,10 @@
             name="news"
             type="com.womeiyouyuming.android.yuereadacg.model.News" />
 
+
     </data>
+
+
 
     <androidx.cardview.widget.CardView
         android:layout_marginTop="4dp"
@@ -17,9 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/news_layout"
             android:background="@android:color/white">
 
 
@@ -86,6 +92,7 @@
                 tools:text="32分钟前" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.cardview.widget.CardView>
 </layout>
