@@ -108,8 +108,3 @@ abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) :
 }
 
 
-object NewsDiffCallback : DiffUtil.ItemCallback<News>() {
-    override fun areItemsTheSame(oldItem: News, newItem: News) = oldItem == newItem
-
-    override fun areContentsTheSame(oldItem: News, newItem: News) = oldItem == newItem
-}
