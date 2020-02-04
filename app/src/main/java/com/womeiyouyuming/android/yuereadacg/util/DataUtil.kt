@@ -15,7 +15,6 @@ import org.jsoup.Jsoup
 val NEWS_PAGE_LIST = listOf("首页", "动漫情报", "展会活动", "萌周边", "万事屋", "游戏宅", "八卦谈")
 
 
-
 fun parseNewsSwipeList(httpResult: String) = Jsoup.parse(httpResult)
     .select("div[class=banner]>div[class=swiper-wrapper]>div[class=swiper-slide]").map {
 
@@ -56,14 +55,35 @@ fun parseNewsContent(httpResult: String): String? {
     val body = Jsoup.parse(httpResult)
         .select("div[class=article-main]")
         .select("div[class=article]").html()
-    val start = "<html><head><meta charset=\"utf-8\"><link href=\"news_content_178acg.css\" rel=\"stylesheet\"></head><body>"
+    val start =
+        "<html><head><meta charset=\"utf-8\"><link href=\"news_content_178acg.css\" rel=\"stylesheet\"></head><body>"
     val end = "</body></html>"
 
     return "$start$body$end"
 }
 
 
-
 fun getEmptyNews() = News("", "", "", "", "", "")
+
+fun parseNewsAnimeList(httpResult: String) =
+    Jsoup.parse(httpResult).select("div[class=container] div[class=content] ul[class=ui-repeater] li").map {
+
+
+        val imgUrl = it.select("div[class=imgbox]>a>img").attr("src")
+
+        val textElement = it.select("p[class=textbox]>a")
+        val title = textElement.text()
+        val url = textElement.attr("href")
+
+
+        val labelElement = it.select("p[class=labelbox]")
+        val author = labelElement.select("span[class=author]").text()
+        val time = labelElement.select("span[class=time]").attr("data-time")
+        val tags = labelElement.select("span[class=tag]").text()
+
+        News(title, url, imgUrl, author, time, tags)
+
+    }
+
 
 

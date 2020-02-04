@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolBar)
 
+
         val navController = findNavController(R.id.navHosFragment)
         //资讯页不显示toolbar
         navController.addOnDestinationChangedListener { _, destination, _ ->

@@ -1,10 +1,12 @@
 package com.womeiyouyuming.android.yuereadacg.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.womeiyouyuming.android.yuereadacg.model.News
 import com.womeiyouyuming.android.yuereadacg.model.NewsSwipe
 import com.womeiyouyuming.android.yuereadacg.network.NetworkState
 import com.womeiyouyuming.android.yuereadacg.repository.NewsRepository
+import com.womeiyouyuming.android.yuereadacg.util.parseNewsAnimeList
 import com.womeiyouyuming.android.yuereadacg.util.parseNewsList
 import com.womeiyouyuming.android.yuereadacg.util.parseNewsSwipeList
 import kotlinx.coroutines.*
@@ -25,6 +27,11 @@ class NewsViewModel : ViewModel() {
 
     private val _newsSwipeListLiveData = MutableLiveData<List<NewsSwipe>>()
     val newsSwipeListLiveData: LiveData<List<NewsSwipe>> = _newsSwipeListLiveData
+
+    val newsAnimeListLiveData = liveData(Dispatchers.IO){
+        val httpResult = newsRepository.getNewsAnime().string()
+        emit(parseNewsAnimeList(httpResult))
+    }
 
 
     init {
