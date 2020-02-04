@@ -15,6 +15,9 @@ class NewsRepository {
 
     suspend fun getNewsContent(formattedUrl: String) = newsServices.getNewsContent(formattedUrl)
 
+    suspend fun getNewsAnime() = newsServices.getNewsAnime()
+
+    suspend fun getNewsAnime(page: Int) = newsServices.getNewsAnime(page)
 
 
 }

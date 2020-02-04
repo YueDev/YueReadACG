@@ -38,6 +38,7 @@ interface NewsServices {
     // 2-30页
     // https://acg.178.com/list/88134860671_30.html
 
+
     @GET("list/88134860671.html")
     suspend fun getNewsAnime(): ResponseBody
     @GET("list/88134860671_{page}.html")
