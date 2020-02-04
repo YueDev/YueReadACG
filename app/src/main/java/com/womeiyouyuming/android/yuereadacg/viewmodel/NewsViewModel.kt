@@ -1,10 +1,9 @@
 package com.womeiyouyuming.android.yuereadacg.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.womeiyouyuming.android.yuereadacg.model.News
 import com.womeiyouyuming.android.yuereadacg.model.NewsSwipe
-import com.womeiyouyuming.android.yuereadacg.network.NetworkStatus
+import com.womeiyouyuming.android.yuereadacg.network.NetworkState
 import com.womeiyouyuming.android.yuereadacg.repository.NewsRepository
 import com.womeiyouyuming.android.yuereadacg.util.parseNewsList
 import com.womeiyouyuming.android.yuereadacg.util.parseNewsSwipeList
@@ -18,8 +17,8 @@ class NewsViewModel : ViewModel() {
     private val newsRepository = NewsRepository()
 
 
-    private val _networkStatusLiveData = MutableLiveData<NetworkStatus>()
-    val networkStatusLiveData: LiveData<NetworkStatus> = _networkStatusLiveData
+    private val _networkStateLiveData = MutableLiveData<NetworkState>()
+    val networkStateLiveData: LiveData<NetworkState> = _networkStateLiveData
 
     private val _newsListLiveDate = MutableLiveData<List<News>>()
     val newsListLiveDate: LiveData<List<News>> = _newsListLiveDate
@@ -40,6 +39,7 @@ class NewsViewModel : ViewModel() {
 
 
 
+
     private fun getNewsHomeData() {
 
 
@@ -47,7 +47,7 @@ class NewsViewModel : ViewModel() {
 
         viewModelScope.launch {
 
-            _networkStatusLiveData.value = NetworkStatus.LOADING
+            _networkStateLiveData.value = NetworkState.LOADING
 
             withContext(Dispatchers.IO) {
 
@@ -56,9 +56,9 @@ class NewsViewModel : ViewModel() {
                         val result = newsRepository.getNews(System.currentTimeMillis()).string()
                         val list = parseNewsList(result)
                         _newsListLiveDate.postValue(list)
-                        _networkStatusLiveData.postValue(NetworkStatus.SUCCESS)
+                        _networkStateLiveData.postValue(NetworkState.SUCCESS)
                     } catch (e: Exception) {
-                        _networkStatusLiveData.postValue(NetworkStatus.FAILED)
+                        _networkStateLiveData.postValue(NetworkState.FAILED)
                     }
                 }
 

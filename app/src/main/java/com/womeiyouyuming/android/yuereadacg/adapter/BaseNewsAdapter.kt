@@ -11,6 +11,7 @@ import com.womeiyouyuming.android.yuereadacg.R
 import com.womeiyouyuming.android.yuereadacg.databinding.ItemNewsCommonBinding
 import com.womeiyouyuming.android.yuereadacg.databinding.ItemNewsHotBinding
 import com.womeiyouyuming.android.yuereadacg.model.News
+import com.womeiyouyuming.android.yuereadacg.network.NetworkState
 
 /**
  * Created by Yue on 2020/1/10.
@@ -21,95 +22,97 @@ import com.womeiyouyuming.android.yuereadacg.model.News
 
 
 abstract class BaseNewsAdapter(private val itemClick: (url: String) -> Unit) :
-    PagedListAdapter<News, BaseNewsAdapter.NewsHolder>(NewsDiffCallback) {
-
-    protected val typeCommon = 0
-    protected val typeHot = 1
-
-    abstract override fun getItemViewType(position: Int): Int
+    PagedListAdapter<News, RecyclerView.ViewHolder>(NewsDiffCallback) {
 
 
-    final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
+    private var networkState: NetworkState? = null
+
+    private fun hasExtraRow() =
+        (networkState == NetworkState.FAILED) && (networkState == NetworkState.LOADING)
+
+    abstract fun isHotTag(): Boolean
+
+
+    final override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
         return when (viewType) {
-            typeHot -> {
-                val binding = DataBindingUtil.inflate<ItemNewsHotBinding>(
+            R.layout.item_news_hot -> NewsHotHolder(
+                DataBindingUtil.inflate(
                     inflater,
                     R.layout.item_news_hot,
                     parent,
                     false
-                )
-                NewsHolder(binding).apply {
-                    itemView.setOnClickListener {
-                        val url = binding.news?.url ?: throw NullPointerException("url is null")
-                        itemClick(url)
-                    }
-                }
-            }
-            else -> {
-                val binding = DataBindingUtil.inflate<ItemNewsCommonBinding>(
+                ), itemClick
+            )
+            R.layout.item_news_common -> NewsCommonHolder(
+                DataBindingUtil.inflate(
                     inflater,
-                    R.layout.item_news_common,
+                    R.layout.item_news_hot,
                     parent,
                     false
-                )
-                NewsHolder(binding).apply {
-                    itemView.setOnClickListener {
-                        val url = binding.news?.url ?: throw NullPointerException("url is null")
-                        itemClick(url)
-                    }
-                }
+                ), itemClick
+            )
+            else -> throw IllegalArgumentException("No such viewType : $viewType")
+        }
+    }
+
+
+    final override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+
+    }
+
+    final override fun getItemCount() = super.getItemCount() + if (hasExtraRow()) 1 else 0
+
+
+    final override fun getItemViewType(position: Int) =
+        when {
+            hasExtraRow() && position == itemCount - 1 -> R.layout.error
+            isHotTag() -> R.layout.item_news_hot
+            else -> R.layout.item_news_common
+        }
+
+
+    class NewsHotHolder(private val binding: ItemNewsHotBinding, itemClick: (url: String) -> Unit) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                itemClick(binding.news?.url ?: throw NullPointerException("url is null"))
             }
         }
-    }
 
-
-    final override fun onBindViewHolder(holder: NewsHolder, position: Int) {
-
-        when (getItemViewType(position)) {
-            typeHot -> holder.bindHot(getItem(position))
-            typeCommon -> holder.bindCommon(getItem(position))
-        }
-    }
-
-
-    class NewsHolder : RecyclerView.ViewHolder {
-
-
-        private lateinit var itemNewsCommonBinding: ItemNewsCommonBinding
-        private lateinit var itemNewsHotBinding: ItemNewsHotBinding
-
-        constructor(itemNewsCommonBinding: ItemNewsCommonBinding) : super(itemNewsCommonBinding.root) {
-            this.itemNewsCommonBinding = itemNewsCommonBinding
-        }
-
-        constructor(itemNewsHotBinding: ItemNewsHotBinding) : super(itemNewsHotBinding.root) {
-            this.itemNewsHotBinding = itemNewsHotBinding
-        }
-
-        fun bindCommon(news: News?) {
+        fun bind(news: News?) {
 
             news?.let {
-                itemNewsCommonBinding.news = news
+                binding.news = news
             }
 
         }
+    }
 
+    class NewsCommonHolder(
+        private val binding: ItemNewsCommonBinding,
+        itemClick: (url: String) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindHot(news: News?) {
+        init {
+            itemClick(binding.news?.url ?: throw NullPointerException("url is null"))
+        }
+
+        fun bind(news: News?) {
 
             news?.let {
-                itemNewsHotBinding.news = news
+                binding.news = news
             }
+
         }
 
     }
+
 }
 
-
-object NewsDiffCallback : DiffUtil.ItemCallback<News>() {
-    override fun areItemsTheSame(oldItem: News, newItem: News) = oldItem == newItem
-
-    override fun areContentsTheSame(oldItem: News, newItem: News) = oldItem == newItem
-}

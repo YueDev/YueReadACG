@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,13 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.womeiyouyuming.android.yuereadacg.R
 import com.womeiyouyuming.android.yuereadacg.adapter.BannerAdapter
 import com.womeiyouyuming.android.yuereadacg.adapter.NewsHomeAdapter
-import com.womeiyouyuming.android.yuereadacg.model.News
-import com.womeiyouyuming.android.yuereadacg.network.NetworkStatus
+import com.womeiyouyuming.android.yuereadacg.network.NetworkState
 import com.womeiyouyuming.android.yuereadacg.util.getEmptyNews
 import com.womeiyouyuming.android.yuereadacg.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.error.*
 import kotlinx.android.synthetic.main.fragment_news_home.*
-import kotlinx.coroutines.*
 
 /**
  * A simple [Fragment] subclass.
@@ -68,17 +64,17 @@ class NewsHomeFragment : Fragment() {
 
 
 
-        newsViewModel.networkStatusLiveData.observe(viewLifecycleOwner) {
+        newsViewModel.networkStateLiveData.observe(viewLifecycleOwner) {
 
 
             when(it) {
 
-                NetworkStatus.LOADING -> {
+                NetworkState.FIRST_LOADING, NetworkState.LOADING -> {
                     refreshButton.visibility = View.GONE
                     progressBar.visibility = View.VISIBLE
                     swipeRefresh.isRefreshing = true
                 }
-                NetworkStatus.FAILED -> {
+                NetworkState.FAILED -> {
                     swipeRefresh.isRefreshing = false
 
                     refreshButton.visibility = View.VISIBLE
@@ -92,7 +88,7 @@ class NewsHomeFragment : Fragment() {
                     }
 
                 }
-                NetworkStatus.SUCCESS -> {
+                NetworkState.SUCCESS -> {
                     swipeRefresh.isRefreshing = false
 
                     refreshButton.visibility = View.VISIBLE

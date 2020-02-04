@@ -21,9 +21,12 @@ class NewsContentViewModel(formattedUrl: String) : ViewModel() {
 
     val newsContentLiveData = liveData(Dispatchers.IO) {
 
-        val httpResult = newsRepository.getNewsContent(formattedUrl).string()
-        val result = parseNewsContent(httpResult)
-
+        val result = try {
+            val httpResult = newsRepository.getNewsContent(formattedUrl).string()
+            parseNewsContent(httpResult)
+        } catch (e: Exception) {
+            "似乎出了点问题"
+        }
 
         emit(result)
 

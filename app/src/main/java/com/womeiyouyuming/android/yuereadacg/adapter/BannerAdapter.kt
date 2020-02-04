@@ -47,7 +47,6 @@ class BannerAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<
         RecyclerView.ViewHolder(binding.root) {
 
 
-
         fun bind(newsSwipe: NewsSwipe) {
             binding.newsSwipe = newsSwipe
         }
