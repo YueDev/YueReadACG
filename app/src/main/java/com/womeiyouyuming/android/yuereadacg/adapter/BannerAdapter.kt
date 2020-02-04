@@ -36,11 +36,7 @@ class BannerAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<
         holder.bind(getItem(position))
     }
 
-    object BannerDiffCallback : DiffUtil.ItemCallback<NewsSwipe>() {
-        override fun areItemsTheSame(oldItem: NewsSwipe, newItem: NewsSwipe) = oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: NewsSwipe, newItem: NewsSwipe) = oldItem == newItem
-    }
 
 
     class BannerHolder(private val binding: ItemBannerBinding) :

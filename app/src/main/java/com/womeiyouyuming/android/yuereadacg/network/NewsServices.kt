@@ -32,4 +32,14 @@ interface NewsServices {
     @GET("{url}")
     suspend fun getNewsContent(@Path("url") url :String): ResponseBody
 
+    // 动漫情报
+    // 第1页
+    // https://acg.178.com/list/88134860671.html
+    // 2-30页
+    // https://acg.178.com/list/88134860671_30.html
+
+    @GET("list/88134860671.html")
+    suspend fun getNewsAnime(): ResponseBody
+    @GET("list/88134860671_{page}.html")
+    suspend fun getNewsAnime(@Path("page")page: Int): ResponseBody
 }
