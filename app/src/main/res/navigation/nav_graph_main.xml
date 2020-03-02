@@ -39,5 +39,9 @@
         <argument
             android:name="url"
             app:argType="string" />
+        <argument
+            android:name="author"
+            app:argType="string"
+            android:defaultValue="178动漫" />
     </fragment>
 </navigation>

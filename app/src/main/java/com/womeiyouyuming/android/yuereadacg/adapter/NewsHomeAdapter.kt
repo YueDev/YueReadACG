@@ -31,7 +31,7 @@ import com.womeiyouyuming.android.yuereadacg.view.ZoomPageTransformer
  */
 class NewsHomeAdapter(
     private val bannerAdapter: BannerAdapter,
-    private val itemClick: (url: String) -> Unit
+    private val itemClick: (url: String, author: String?) -> Unit
 ) :
     ListAdapter<News, NewsHomeAdapter.NewsHomeHolder>(NewsDiffCallback) {
 
@@ -63,7 +63,8 @@ class NewsHomeAdapter(
                 val holder = NewsHomeHolder(binding)
                 holder.itemView.setOnClickListener {
                     val url = binding.news?.url ?: throw NullPointerException("url is null")
-                    itemClick(url)
+                    val author = binding.news?.author
+                    itemClick(url, author)
                 }
                 return holder
             }
@@ -79,7 +80,8 @@ class NewsHomeAdapter(
                 val holder = NewsHomeHolder(binding)
                 holder.itemView.setOnClickListener {
                     val url = binding.news?.url ?: throw NullPointerException("url is null")
-                    itemClick(url)
+                    val author = binding.news?.author
+                    itemClick(url, author)
                 }
                 return holder
             }
@@ -116,6 +118,7 @@ class NewsHomeAdapter(
         private lateinit var bannerViewPager: ViewPager2
         private lateinit var itemNewsCommonBinding: ItemNewsCommonBinding
         private lateinit var itemNewsHotBinding: ItemNewsHotBinding
+
 
 
         constructor(itemView: View, adapter: BannerAdapter) : super(itemView) {

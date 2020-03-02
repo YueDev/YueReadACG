@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.womeiyouyuming.android.yuereadacg.R
+import com.womeiyouyuming.android.yuereadacg.network.NetworkState
 
 /**
  * Created by Yue on 2020/1/10.
@@ -13,5 +14,21 @@ import com.womeiyouyuming.android.yuereadacg.R
 fun getImgFromUrl(imageView: ImageView, url: String?) {
 
     Glide.with(imageView).load(url).placeholder(R.drawable.ic_placeholder).into(imageView)
+
+}
+
+@BindingAdapter("app:showWhenLoading")
+fun showWhenLoading(view: View, networkState: NetworkState?) {
+
+    view.visibility = if (networkState == NetworkState.LOADING) View.VISIBLE else View.GONE
+
+}
+
+
+
+@BindingAdapter("app:showWhenFailed")
+fun showWhenFailed(view: View, networkState: NetworkState?) {
+
+    view.visibility = if (networkState == NetworkState.FAILED) View.VISIBLE else View.GONE
 
 }

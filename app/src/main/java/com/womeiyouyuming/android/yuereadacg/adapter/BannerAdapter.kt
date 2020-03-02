@@ -12,6 +12,8 @@ import com.womeiyouyuming.android.yuereadacg.model.NewsSwipe
 
 /**
  * Created by Yue on 2020/1/10.
+ *
+ * 资讯——首页 的 banner adapter
  */
 class BannerAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<NewsSwipe, BannerAdapter.BannerHolder>(BannerDiffCallback) {
 

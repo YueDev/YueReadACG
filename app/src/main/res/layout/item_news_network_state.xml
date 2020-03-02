@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="networkState"
+            type="com.womeiyouyuming.android.yuereadacg.network.NetworkState" />
+
+    </data>
+
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical">
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            tools:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:showWhenLoading="@{networkState}" />
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="似乎出了点问题"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="18sp"
+            app:showWhenFailed="@{networkState}" />
+
+
+        <Button
+            android:id="@+id/retryButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="重新加载"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            app:showWhenFailed="@{networkState}" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

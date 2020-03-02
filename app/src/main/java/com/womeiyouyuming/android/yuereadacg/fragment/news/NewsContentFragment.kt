@@ -53,6 +53,7 @@ class NewsContentFragment : Fragment() {
     private fun initWebView(url: String) {
         val formattedUrl = formatUrl(url)
 
+        val author = requireArguments().getString("author")
 
         val newsContentViewModel by viewModels<NewsContentViewModel> {
             object : ViewModelProvider.Factory {
@@ -64,7 +65,8 @@ class NewsContentFragment : Fragment() {
         val innerUrl = "file:///android_asset/"
 
         newsContentViewModel.newsContentLiveData.observe(viewLifecycleOwner) {
-            newsContentWebView.loadDataWithBaseURL(innerUrl, it, "text/html", "UTF-8", null)
+            val htmlText = it?.replace("<span class=\"author\">178动漫原创</span>", "<span class=\"author\">${author}</span>")
+            newsContentWebView.loadDataWithBaseURL(innerUrl, htmlText, "text/html", "UTF-8", null)
         }
 
 

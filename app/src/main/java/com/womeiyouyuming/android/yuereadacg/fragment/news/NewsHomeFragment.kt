@@ -41,24 +41,24 @@ class NewsHomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-        initRefreshLayout()
+        initSwipeRefresh()
         initNewsHomeRecyclerView()
 
 
     }
 
-    private fun initRefreshLayout() {
+    private fun initSwipeRefresh() {
 
         val color = ContextCompat.getColor(requireContext(), R.color.colorAccent)
         swipeRefresh.setColorSchemeColors(color)
 
 
         swipeRefresh.setOnRefreshListener {
-            newsViewModel.refresh()
+            newsViewModel.refreshNewsHome()
         }
 
         refreshButton.setOnClickListener {
-            newsViewModel.refresh()
+            newsViewModel.refreshNewsHome()
         }
 
 
@@ -113,8 +113,8 @@ class NewsHomeFragment : Fragment() {
         }
 
 
-        val newsHomeAdapter = NewsHomeAdapter(bannerAdapter) {
-            val bundle = bundleOf(Pair("url", it))
+        val newsHomeAdapter = NewsHomeAdapter(bannerAdapter) { url, author ->
+            val bundle = bundleOf(Pair("url", url), Pair("author", author))
             findNavController().navigate(R.id.action_nav_news_to_nav_news_content, bundle)
         }
 

@@ -33,9 +33,11 @@
                 android:id="@+id/tagTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="36dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_news_tag_text_view"
+                android:gravity="center"
                 android:text="@{news.tags}"
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp"
@@ -80,13 +82,15 @@
 
             <TextView
                 android:id="@+id/timeTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:gravity="start"
                 android:text="@{news.time}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="@+id/titleTextView"
                 app:layout_constraintTop_toBottomOf="@+id/barrier"
                 tools:text="32分钟前" />

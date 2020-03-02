@@ -12,7 +12,7 @@ import org.jsoup.Jsoup
  */
 
 
-val NEWS_PAGE_LIST = listOf("首页", "动漫情报", "展会活动", "萌周边", "万事屋", "游戏宅", "八卦谈")
+val NEWS_PAGE_LIST = listOf("首页", "动漫情报", "展会活动", "福利社", "萌周边", "万事屋", "八卦谈", "游戏宅")
 
 
 fun parseNewsSwipeList(httpResult: String) = Jsoup.parse(httpResult)
@@ -35,13 +35,15 @@ fun parseNewsList(httpResult: String): List<News> {
     val json = httpResult.substringAfter("var _articles=")
     val type = object : TypeToken<List<News?>>() {}.type
     return Gson().fromJson<List<News?>>(json, type).filterNotNull().map {
-        val tag = it.tags.substringBefore(",").substringBefore("，").run {
-            if (isBlank()) "其他" else this
-        }
+        val tag = formatTags(it.tags)
         it.copy(tags = tag)
     }
 }
 
+
+fun formatTags(tags: String) = tags.substringBefore(",").substringBefore("，").run {
+    if (isBlank()) "其他" else this
+}
 
 // 178给的url有的带base url，有的不带，另外有的以http开头，所以都要处理
 fun formatUrl(url: String) = url.replace("http://", "https://").let {
@@ -79,7 +81,8 @@ fun parseNewsAnimeList(httpResult: String) =
         val labelElement = it.select("p[class=labelbox]")
         val author = labelElement.select("span[class=author]").text()
         val time = labelElement.select("span[class=time]").attr("data-time")
-        val tags = labelElement.select("span[class=tag]").text()
+        val tags = formatTags(labelElement.select("span[class=tag]").text())
+
 
         News(title, url, imgUrl, author, time, tags)
 

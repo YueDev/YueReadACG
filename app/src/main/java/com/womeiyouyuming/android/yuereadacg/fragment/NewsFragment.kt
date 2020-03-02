@@ -30,7 +30,6 @@ class NewsFragment : Fragment() {
 
         viewPager.adapter = NewsPagerAdapter(this)
 
-        var i = 1
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = NEWS_PAGE_LIST[position]
