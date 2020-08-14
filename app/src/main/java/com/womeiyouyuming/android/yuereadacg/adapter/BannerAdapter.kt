@@ -40,7 +40,6 @@ class BannerAdapter(private val itemClick: (url: String) -> Unit) : ListAdapter<
 
 
 
-
     class BannerHolder(private val binding: ItemBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

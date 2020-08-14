@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+    android:id="@+id/episodeButton"
+    android:layout_width="136dp"
+    android:layout_height="80dp"
+    android:layout_margin="8dp"
+    android:ellipsize="end"
+    android:lineSpacingExtra="8dp"
+    android:maxLines="2"
+    android:padding="8dp"
+    android:textAlignment="textStart"
+    android:textColor="@color/darkGrayAndroid"
+    android:textSize="14sp"
+    app:strokeColor="@color/darkGrayAndroid"
+    app:strokeWidth="2px"
+    app:rippleColor="@android:color/transparent"
+    tools:text="第 09 集\n我们这的不知道说什么好了aaaa" />
+

@@ -6,12 +6,27 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.ViewCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.dueeeke.videoplayer.player.VideoViewManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+
+    private val navController by lazy {
+        findNavController(R.id.navHosFragment)
+    }
+
+
+    private val appBarConfiguration by lazy {
+        AppBarConfiguration(navController.graph)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,21 +41,31 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolBar)
 
 
-        val navController = findNavController(R.id.navHosFragment)
         //资讯页不显示toolbar
         navController.addOnDestinationChangedListener { _, destination, _ ->
+
             toolBar.visibility = if (destination.id == R.id.nav_news) View.GONE else View.VISIBLE
 
             bottomNavView.visibility = if (destination.id == R.id.nav_news_content) View.GONE else View.VISIBLE
 
+
+
         }
 
-        //nav与tooBar和bottomNavView联动
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolBar.setupWithNavController(navController, appBarConfiguration)
+
+
+        //nav与tooBar和bottomNavView联动,这里不能用toolbar的setupActionBarWithNavController，会出问题。
+        // 因为toolbar已经被设置成actionbar，所以用setupActionBarWithNavController
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNavView.setupWithNavController(navController)
 
-
     }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
 }

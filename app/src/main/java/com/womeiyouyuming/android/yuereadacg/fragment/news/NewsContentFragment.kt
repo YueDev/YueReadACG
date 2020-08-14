@@ -37,14 +37,13 @@ class NewsContentFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_news_content, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
 
         val url = requireArguments().getString("url")
         url?.let {
             initWebView(url)
-        } ?: run {
-            // 错误处理
         }
     }
 
@@ -65,8 +64,10 @@ class NewsContentFragment : Fragment() {
         val innerUrl = "file:///android_asset/"
 
         newsContentViewModel.newsContentLiveData.observe(viewLifecycleOwner) {
-            val htmlText = it?.replace("<span class=\"author\">178动漫原创</span>", "<span class=\"author\">${author}</span>")
+            val htmlText = it.replace("<span class=\"author\">178动漫原创</span>", "<span class=\"author\">${author}</span>")
+            Log.d("YUEDEVTAG", "NewsContentFragment -> initWebView():\n ${htmlText}")
             newsContentWebView.loadDataWithBaseURL(innerUrl, htmlText, "text/html", "UTF-8", null)
+            progressBar.visibility = View.GONE
         }
 
 

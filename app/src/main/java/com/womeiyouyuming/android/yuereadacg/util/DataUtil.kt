@@ -3,8 +3,10 @@ package com.womeiyouyuming.android.yuereadacg.util
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.womeiyouyuming.android.yuereadacg.R
 import com.womeiyouyuming.android.yuereadacg.model.News
 import com.womeiyouyuming.android.yuereadacg.model.NewsSwipe
+import com.womeiyouyuming.android.yuereadacg.model.Photo
 import org.jsoup.Jsoup
 
 /**
@@ -53,7 +55,7 @@ fun formatUrl(url: String) = url.replace("http://", "https://").let {
 }
 
 
-fun parseNewsContent(httpResult: String): String? {
+fun parseNewsContent(httpResult: String): String {
     val body = Jsoup.parse(httpResult)
         .select("div[class=article-main]")
         .select("div[class=article]").html()
@@ -68,25 +70,48 @@ fun parseNewsContent(httpResult: String): String? {
 fun getEmptyNews() = News("", "", "", "", "", "")
 
 fun parseNewsAnimeList(httpResult: String) =
-    Jsoup.parse(httpResult).select("div[class=container] div[class=content] ul[class=ui-repeater] li").map {
+    Jsoup.parse(httpResult)
+        .select("div[class=container] div[class=content] ul[class=ui-repeater] li").map {
 
 
-        val imgUrl = it.select("div[class=imgbox]>a>img").attr("src")
+            val imgUrl = it.select("div[class=imgbox]>a>img").attr("src")
 
-        val textElement = it.select("p[class=textbox]>a")
-        val title = textElement.text()
-        val url = textElement.attr("href")
-
-
-        val labelElement = it.select("p[class=labelbox]")
-        val author = labelElement.select("span[class=author]").text()
-        val time = labelElement.select("span[class=time]").attr("data-time")
-        val tags = formatTags(labelElement.select("span[class=tag]").text())
+            val textElement = it.select("p[class=textbox]>a")
+            val title = textElement.text()
+            val url = textElement.attr("href")
 
 
-        News(title, url, imgUrl, author, time, tags)
+            val labelElement = it.select("p[class=labelbox]")
+            val author = labelElement.select("span[class=author]").text()
+            val time = labelElement.select("span[class=time]").attr("data-time")
+            val tags = formatTags(labelElement.select("span[class=tag]").text())
 
+
+            News(title, url, imgUrl, author, time, tags)
+
+        }
+
+fun getRandomAvatar() = listOf(
+    R.mipmap.avator_01,
+    R.mipmap.avator_02,
+    R.mipmap.avator_03,
+    R.mipmap.avator_04,
+    R.mipmap.avator_05,
+    R.mipmap.avator_06,
+    R.mipmap.avator_07,
+    R.mipmap.avator_08,
+    R.mipmap.avator_09,
+    R.mipmap.avator_10,
+    R.mipmap.avator_11
+).random()
+
+
+fun parseAmlyu(result: String): List<Photo> {
+    val elements = Jsoup.parse(result)
+        .select("div[class=excerpts]>article[class=excerpt excerpt-c5 excerpt-hoverplugin]>a>img")
+    return elements.map { e ->
+        Photo(e.attr("data-src"))
     }
-
+}
 
 

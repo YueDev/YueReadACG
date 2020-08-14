@@ -13,8 +13,8 @@
         <action
             android:id="@+id/action_nav_news_to_nav_news_content"
             app:destination="@id/nav_news_content"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_close_enter" />
     </fragment>
     <fragment
         android:id="@+id/nav_gallery"
@@ -22,10 +22,14 @@
         android:label="@string/lab_gallery"
         tools:layout="@layout/fragment_gallery" />
     <fragment
-        android:id="@+id/nav_discuss"
-        android:name="com.womeiyouyuming.android.yuereadacg.fragment.DiscussFragment"
-        android:label="@string/lab_discuss"
-        tools:layout="@layout/fragment_discuss" />
+        android:id="@+id/nav_anime"
+        android:name="com.womeiyouyuming.android.yuereadacg.fragment.AnimeFragment"
+        android:label="@string/lab_anime"
+        tools:layout="@layout/fragment_anime" >
+        <action
+            android:id="@+id/action_nav_anime_to_playActivity"
+            app:destination="@id/playActivity" />
+    </fragment>
     <fragment
         android:id="@+id/nav_about"
         android:name="com.womeiyouyuming.android.yuereadacg.fragment.AboutFragment"
@@ -44,4 +48,12 @@
             app:argType="string"
             android:defaultValue="178动漫" />
     </fragment>
+    <activity
+        android:id="@+id/playActivity"
+        android:name="com.womeiyouyuming.android.yuereadacg.PlayActivity"
+        tools:layout="@layout/activity_play" >
+        <argument
+            android:name="anime"
+            app:argType="com.womeiyouyuming.android.yuereadacg.model.Anime" />
+    </activity>
 </navigation>

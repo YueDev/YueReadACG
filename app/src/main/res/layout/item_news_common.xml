@@ -9,7 +9,6 @@
             name="news"
             type="com.womeiyouyuming.android.yuereadacg.model.News" />
 
-
     </data>
 
 
@@ -37,7 +36,7 @@
                 android:minWidth="36dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_news_tag_text_view"
+                android:background="@drawable/bg_tag_bounds"
                 android:gravity="center"
                 android:text="@{news.tags}"
                 android:textColor="@color/colorAccent"

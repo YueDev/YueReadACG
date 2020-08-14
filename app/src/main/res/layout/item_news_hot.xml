@@ -24,7 +24,7 @@
             android:id="@+id/news_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            >
 
 
             <TextView
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_news_tag_text_view"
+                android:background="@drawable/bg_tag_bounds"
                 android:gravity="center"
                 android:minWidth="36dp"
                 android:text="@{news.tags}"

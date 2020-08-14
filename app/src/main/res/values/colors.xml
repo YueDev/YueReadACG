@@ -6,5 +6,10 @@
 
     <color name="statusBarColorBeforeSDK23">#22000000</color>
 
+    <color name="grayBg">#EEF6F9</color>
+
+
+    <color name="darkGrayAndroid">#AAAAAA</color>
+
 
 </resources>

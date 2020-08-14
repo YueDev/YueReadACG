@@ -7,9 +7,9 @@
         android:title="@string/lab_news"
         />
     <item
-        android:id="@+id/nav_discuss"
-        android:icon="@drawable/ic_discuss_black_24dp"
-        android:title="@string/lab_discuss"
+        android:id="@+id/nav_anime"
+        android:icon="@drawable/ic_anime_black_24dp"
+        android:title="@string/lab_anime"
         />
     <item
         android:id="@+id/nav_gallery"

@@ -2,11 +2,12 @@
 <resources>
     <string name="app_name">悦读ACG</string>
     <string name="lab_news">资讯</string>
-    <string name="lab_discuss">讨论</string>
+    <string name="lab_anime">动画</string>
     <string name="lab_gallery">妹子图</string>
     <string name="lab_about">关于悦读</string>
     <string name="lab_news_content">悦读</string>
     <string name="tag_hot">热门</string>
     <string name="text_error">似乎出了点问题</string>
     <string name="text_refresh">重新加载</string>
+    <string name="lab_play">悦读</string>
 </resources>

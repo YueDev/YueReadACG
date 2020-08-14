@@ -16,10 +16,9 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:tabMode="scrollable"
-        app:tabBackground="@color/colorPrimaryDark"
-        app:tabSelectedTextColor="@color/colorPrimary"
-        />
+        app:tabMode="scrollable"/>
+<!--        app:tabBackground="@color/colorPrimaryDark"-->
+<!--        app:tabSelectedTextColor="@color/colorPrimary"-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/grayBg"
         />
 
 
