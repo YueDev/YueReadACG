@@ -14,13 +14,19 @@
             android:id="@+id/action_nav_news_to_nav_news_content"
             app:destination="@id/nav_news_content"
             app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_close_enter" />
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.womeiyouyuming.android.yuereadacg.fragment.GalleryFragment"
         android:label="@string/lab_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_gallery_to_nav_photo"
+            app:destination="@id/nav_photo" />
+    </fragment>
     <fragment
         android:id="@+id/nav_anime"
         android:name="com.womeiyouyuming.android.yuereadacg.fragment.AnimeFragment"
@@ -56,4 +62,13 @@
             android:name="anime"
             app:argType="com.womeiyouyuming.android.yuereadacg.model.Anime" />
     </activity>
+    <fragment
+        android:id="@+id/nav_photo"
+        android:name="com.womeiyouyuming.android.yuereadacg.fragment.PhotoFragment"
+        android:label="@string/lab_photo"
+        tools:layout="@layout/fragment_photo" >
+        <argument
+            android:name="imgUrl"
+            app:argType="string" />
+    </fragment>
 </navigation>

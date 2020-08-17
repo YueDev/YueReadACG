@@ -82,8 +82,11 @@ class GalleryFragment : Fragment() {
 
 
         val adapter = GalleryAdapter(retry = { viewModel.retry() }, itemClick = {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            val bundle = bundleOf("imgUrl" to it)
+            findNavController().navigate(R.id.action_nav_gallery_to_nav_photo, bundle)
         })
+
+
 
 
         galleryRecyclerView.layoutManager = GridLayoutManager(requireContext(), spanCount).also {

@@ -3,6 +3,7 @@ package com.womeiyouyuming.android.yuereadacg
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,6 @@ import com.womeiyouyuming.android.yuereadacg.model.Anime
 import com.womeiyouyuming.android.yuereadacg.util.getRandomAvatar
 import com.womeiyouyuming.android.yuereadacg.view.MyPrepareView
 import com.womeiyouyuming.android.yuereadacg.view.MyVodControlView
-import kotlinx.android.synthetic.main.activity_main.toolBar
 import kotlinx.android.synthetic.main.activity_play.*
 
 class PlayActivity : AppCompatActivity() {
@@ -60,18 +60,24 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
+
     override fun onBackPressed() {
         if (VideoViewManager.instance().get("PlayActivity")?.onBackPressed() == true) return
         super.onBackPressed()
     }
 
     private fun initToolbar() {
-        toolBar.title = resources?.getString(R.string.lab_play)
-        setSupportActionBar(toolBar)
+        supportActionBar?.title = resources?.getString(R.string.lab_play)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolBar.setNavigationOnClickListener {
+
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
             finish()
         }
+        return true
     }
 
     private fun initRecyclerView() {
