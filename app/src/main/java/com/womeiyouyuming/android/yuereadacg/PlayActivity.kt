@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.*
 import androidx.core.app.ActivityCompat
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,6 +19,7 @@ import com.womeiyouyuming.android.yuereadacg.util.getRandomAvatar
 import com.womeiyouyuming.android.yuereadacg.view.MyPrepareView
 import com.womeiyouyuming.android.yuereadacg.view.MyVodControlView
 import kotlinx.android.synthetic.main.activity_play.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class PlayActivity : AppCompatActivity() {
 
@@ -67,9 +69,11 @@ class PlayActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        supportActionBar?.title = resources?.getString(R.string.lab_play)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolBar.title = resources.getString(R.string.lab_play)
 
+        toolBar.setNavigationOnClickListener {
+            finish()
+        }
 
     }
 

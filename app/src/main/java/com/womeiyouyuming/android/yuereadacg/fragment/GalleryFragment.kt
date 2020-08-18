@@ -21,6 +21,7 @@ import com.womeiyouyuming.android.yuereadacg.network.NetworkState
 import com.womeiyouyuming.android.yuereadacg.viewmodel.GalleryViewModel
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.fragment_gallery.swipeRefresh
+import kotlinx.android.synthetic.main.toolbar.*
 
 /**
  * A simple [Fragment] subclass.
@@ -48,6 +49,12 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        toolBar.title = resources.getString(R.string.lab_gallery)
+
+        toolBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
         initSwipeRefresh()
         initRecyclerView()

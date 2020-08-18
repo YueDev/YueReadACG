@@ -15,6 +15,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.marginTop
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.womeiyouyuming.android.yuereadacg.R
@@ -23,6 +24,7 @@ import com.womeiyouyuming.android.yuereadacg.network.NetworkState
 import com.womeiyouyuming.android.yuereadacg.viewmodel.AnimeViewModel
 import kotlinx.android.synthetic.main.fragment_anime.*
 import kotlinx.android.synthetic.main.fragment_anime.swipeRefresh
+import kotlinx.android.synthetic.main.toolbar.*
 
 /**
  * A simple [Fragment] subclass.
@@ -49,10 +51,19 @@ class AnimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        toolBar.title = resources.getString(R.string.lab_anime)
+
+        toolBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
         initSwipeRefresh()
         initRecyclerView()
 
+
+        animeViewModel.animeListLiveData.observe(viewLifecycleOwner) {
+
+        }
 
     }
 

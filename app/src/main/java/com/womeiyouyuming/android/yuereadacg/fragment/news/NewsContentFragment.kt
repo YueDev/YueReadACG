@@ -6,9 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +16,7 @@ import com.womeiyouyuming.android.yuereadacg.R
 import com.womeiyouyuming.android.yuereadacg.util.formatUrl
 import com.womeiyouyuming.android.yuereadacg.viewmodel.NewsContentViewModel
 import kotlinx.android.synthetic.main.fragment_news_content.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 /**
  * A simple [Fragment] subclass.
@@ -42,9 +40,11 @@ class NewsContentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        toolBar.setNavigationOnClickListener {
-//            findNavController().navigateUp()
-//        }
+        toolBar.title = resources.getString(R.string.lab_news_content)
+
+        toolBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
 
         val url = requireArguments().getString("url")

@@ -25,7 +25,11 @@
         tools:layout="@layout/fragment_gallery" >
         <action
             android:id="@+id/action_nav_gallery_to_nav_photo"
-            app:destination="@id/nav_photo" />
+            app:destination="@id/nav_photo"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/nav_anime"
@@ -34,7 +38,11 @@
         tools:layout="@layout/fragment_anime" >
         <action
             android:id="@+id/action_nav_anime_to_playActivity"
-            app:destination="@id/playActivity" />
+            app:destination="@id/playActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/nav_about"

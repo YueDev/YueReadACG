@@ -8,6 +8,11 @@
     android:orientation="vertical"
     tools:context=".PlayActivity">
 
+    <include
+        android:id="@+id/include3"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.womeiyouyuming.android.yuereadacg.view.MyVideoView
         android:id="@+id/videoView"
@@ -16,7 +21,7 @@
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/include3" />
 
     <TextView
         android:id="@+id/titleTextView"

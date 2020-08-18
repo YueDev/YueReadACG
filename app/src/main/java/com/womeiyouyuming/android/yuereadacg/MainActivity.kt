@@ -42,11 +42,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//        window.decorView.setOnSystemUiVisibilityChangeListener { visibility ->
-//
-//        }
-
-
     }
 
 

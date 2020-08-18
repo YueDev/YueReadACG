@@ -11,4 +11,8 @@
     <string name="text_refresh">重新加载</string>
     <string name="lab_play">悦读</string>
     <string name="lab_photo">" 悦读"</string>
+    <string name="menu_refresh">刷新</string>
+    <string name="menu_wallpaper">壁纸</string>
+    <string name="menu_save">保存</string>
+    <string name="menu_share">分享</string>
 </resources>

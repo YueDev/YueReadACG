@@ -6,23 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".fragment.news.NewsContentFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolBar"
-            android:layout_width="match_parent"
-            android:background="@color/colorPrimaryDark"
-            app:title="@string/lab_news_content"
-            app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <WebView
         android:id="@+id/newsContentWebView"
@@ -31,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -42,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/newsContentWebView"
         app:layout_constraintStart_toStartOf="@+id/newsContentWebView"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintTop_toBottomOf="@+id/include"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
