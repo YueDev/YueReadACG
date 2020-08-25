@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
+import android.webkit.WebView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -51,11 +54,15 @@ class NewsContentFragment : Fragment() {
         url?.let {
             initWebView(url)
         }
+
+
+
     }
 
 
 
     private fun initWebView(url: String) {
+
         val formattedUrl = formatUrl(url)
 
         val author = requireArguments().getString("author")
@@ -67,15 +74,26 @@ class NewsContentFragment : Fragment() {
             }
         }
 
+
+
         val innerUrl = "file:///android_asset/"
 
         newsContentViewModel.newsContentLiveData.observe(viewLifecycleOwner) {
             val htmlText = it.replace("<span class=\"author\">178动漫原创</span>", "<span class=\"author\">${author}</span>")
-            Log.d("YUEDEVTAG", "NewsContentFragment -> initWebView():\n ${htmlText}")
             newsContentWebView.loadDataWithBaseURL(innerUrl, htmlText, "text/html", "UTF-8", null)
             progressBar.visibility = View.GONE
         }
 
+        newsContentWebView.setOnLongClickListener {
+            val result = newsContentWebView.hitTestResult ?: return@setOnLongClickListener false
+            if (result.type == WebView.HitTestResult.IMAGE_TYPE) {
+                val extra = result.extra ?: return@setOnLongClickListener false
+                Log.d("YUEDEVTAG", extra)
+                val bundle = bundleOf("imgUrl" to extra)
+                findNavController().navigate(R.id.action_nav_news_content_to_nav_photo, bundle)
+                return@setOnLongClickListener true
+            } else return@setOnLongClickListener false
+        }
 
     }
 

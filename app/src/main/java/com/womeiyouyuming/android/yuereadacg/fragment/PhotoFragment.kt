@@ -4,9 +4,11 @@ import android.Manifest
 import android.app.Application
 import android.content.ContentValues
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -47,6 +49,7 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
+        Log.d("YUEDEVTAG", "PhotoFragment -> onCreateView(): ${imgUrl}")
 
         return inflater.inflate(R.layout.fragment_photo, container, false)
     }
@@ -96,21 +99,21 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     //菜单，注意是是toolbar的
     override fun onMenuItemClick(item: MenuItem?) = when (item?.itemId) {
         R.id.menu_item_refresh -> {
-            Toast.makeText(requireContext(), "刷新点击了", Toast.LENGTH_SHORT).show()
+            loadPhoto()
             true
         }
         R.id.menu_item_save -> {
             savePhoto()
             true
         }
-        R.id.menu_item_wallpaper -> {
-            Toast.makeText(requireContext(), "壁纸点击了", Toast.LENGTH_SHORT).show()
-            true
-        }
-        R.id.menu_item_share -> {
-
-            true
-        }
+//        R.id.menu_item_wallpaper -> {
+//            Toast.makeText(requireContext(), "壁纸点击了", Toast.LENGTH_SHORT).show()
+//            true
+//        }
+//        R.id.menu_item_share -> {
+//
+//            true
+//        }
         else -> false
     }
 
@@ -120,7 +123,9 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
 
 //        getImgFromAmlyu(photoView, imgUrl)
 
-        Glide.with(photoView).load(imgUrl).into(photoView)
+
+
+        loadPhoto()
 
         //注册上下文菜单
         registerForContextMenu(photoView)
@@ -143,6 +148,7 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
             true
         }
     }
+
 
     private fun initToolbar() {
         //设置toolbar
@@ -256,6 +262,35 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         }).preload()
     }
 
+
+
+    //加载图片，第一次加载 和 刷新 用
+    private fun loadPhoto() {
+
+        Glide.with(photoView).load(imgUrl).addListener(object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                Toast.makeText(requireContext(), "出错了，请稍后再试", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                Toast.makeText(requireContext(), "图片加载成功", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }).into(photoView)
+
+    }
 
 
 }
