@@ -1,35 +1,27 @@
 package com.womeiyouyuming.android.yuereadacg.fragment
 
 import android.Manifest
-import android.app.Application
-import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import androidx.core.view.ViewCompat
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.dueeeke.videoplayer.util.PlayerUtils.getApplication
 import com.permissionx.guolindev.PermissionX
 import com.womeiyouyuming.android.yuereadacg.R
 import com.womeiyouyuming.android.yuereadacg.util.savePhotoWithBitmap
 import kotlinx.android.synthetic.main.fragment_photo.*
 import kotlinx.android.synthetic.main.toolbar.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 /**
@@ -40,6 +32,8 @@ import kotlinx.coroutines.withContext
 class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
 
 
+    private var isRefresh = false
+
     private val imgUrl by lazy {
         requireArguments().getString("imgUrl")
     }
@@ -48,8 +42,6 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        Log.d("YUEDEVTAG", "PhotoFragment -> onCreateView(): ${imgUrl}")
 
         return inflater.inflate(R.layout.fragment_photo, container, false)
     }
@@ -78,6 +70,7 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     }
 
 
+    //弹出菜单 上下文菜单
     override fun onCreateContextMenu(
         menu: ContextMenu,
         v: View,
@@ -99,6 +92,7 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     //菜单，注意是是toolbar的
     override fun onMenuItemClick(item: MenuItem?) = when (item?.itemId) {
         R.id.menu_item_refresh -> {
+            isRefresh = true
             loadPhoto()
             true
         }
@@ -114,22 +108,17 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
 //
 //            true
 //        }
+
         else -> false
     }
 
 
     private fun initPhotoView() {
 
-
-//        getImgFromAmlyu(photoView, imgUrl)
-
-
-
         loadPhoto()
 
         //注册上下文菜单
         registerForContextMenu(photoView)
-
 
         photoView.setOnClickListener {
 
@@ -263,7 +252,6 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     }
 
 
-
     //加载图片，第一次加载 和 刷新 用
     private fun loadPhoto() {
 
@@ -285,7 +273,8 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                 dataSource: DataSource?,
                 isFirstResource: Boolean
             ): Boolean {
-                Toast.makeText(requireContext(), "图片加载成功", Toast.LENGTH_SHORT).show()
+                //第一次加载不显示提示，只有刷新的时候才显示
+                if (isRefresh) Toast.makeText(requireContext(), "图片加载成功", Toast.LENGTH_SHORT).show()
                 return false
             }
         }).into(photoView)

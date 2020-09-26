@@ -41,7 +41,6 @@ class PlayActivity : AppCompatActivity() {
         //SDK23以下，状态栏文字颜色不会跟着浅色背景改变，因此不能用纯白的状态栏背景，给一个灰色
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             window.statusBarColor = ActivityCompat.getColor(this, R.color.statusBarColorBeforeSDK23)
-
         initView()
     }
 

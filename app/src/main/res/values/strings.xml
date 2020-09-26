@@ -15,6 +15,7 @@
     <string name="menu_refresh">Refresh</string>
     <string name="menu_share">Share</string>
     <string name="readme">Yue Read</string>
+    <string name="email">Email(click ->): yuedev.cn@gmail.com</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
