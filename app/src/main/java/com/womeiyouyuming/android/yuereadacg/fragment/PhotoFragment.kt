@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -243,7 +242,12 @@ class PhotoFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                     return false
                 }
 
-                savePhotoWithBitmap(requireContext(), resource, imgUrl!!.substringAfterLast("/")) {
+                val names = imgUrl!!.substringAfterLast("/").split(".")
+                val fileName = names[0]
+                val isPng = names[1].lowercase() == "png"
+
+
+                savePhotoWithBitmap(requireContext(), resource, fileName, isPng) {
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 }
                 return false

@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
  *
  *
  */
-abstract class BaseDataSource<T> : PageKeyedDataSource<Int, T>() {
+abstract class BaseDataSource<T:Any> : PageKeyedDataSource<Int, T>() {
 
 
     abstract val maxPage: Int

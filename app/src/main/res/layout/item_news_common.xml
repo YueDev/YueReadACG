@@ -68,7 +68,7 @@
                 android:layout_height="60dp"
                 android:layout_marginEnd="16dp"
                 android:scaleType="centerCrop"
-                app:imgUrl="@{news.imgUrl}"
+                imgUrl="@{news.imgUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/titleTextView"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />

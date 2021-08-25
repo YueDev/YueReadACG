@@ -20,7 +20,7 @@ import com.womeiyouyuming.android.yuereadacg.network.NetworkState
  */
 
 
-abstract class BasePagedListAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
+abstract class BasePagedListAdapter<T:Any>(diffCallback: DiffUtil.ItemCallback<T>) :
     PagedListAdapter<T, RecyclerView.ViewHolder>(diffCallback) {
 
 

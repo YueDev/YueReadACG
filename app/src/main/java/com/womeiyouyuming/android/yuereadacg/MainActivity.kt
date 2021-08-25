@@ -2,17 +2,15 @@ package com.womeiyouyuming.android.yuereadacg
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.view.ViewCompat
+
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+
 import androidx.navigation.ui.setupWithNavController
-import com.dueeeke.videoplayer.player.VideoViewManager
+
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -39,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottomNavView.setupWithNavController(navController)
-
 
 
     }

@@ -31,7 +31,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:imgUrl="@{anime.img}"
+                imgUrl="@{anime.img}"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 

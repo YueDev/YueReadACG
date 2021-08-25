@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="196dp"
                 android:scaleType="centerCrop"
-                app:imgUrlAmlyu="@{photo.thumbUrl}"
+                imgUrlAmlyu="@{photo.thumbUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

@@ -2,17 +2,14 @@
 
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="networkState"
             type="com.womeiyouyuming.android.yuereadacg.network.NetworkState" />
 
     </data>
-
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -28,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:showWhenLoading="@{networkState}" />
+            showWhenLoading="@{networkState}" />
 
 
         <TextView
@@ -39,7 +36,7 @@
             android:text="似乎出了点问题"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="18sp"
-            app:showWhenFailed="@{networkState}" />
+            showWhenFailed="@{networkState}" />
 
 
         <Button
@@ -51,7 +48,7 @@
             android:text="重新加载"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            app:showWhenFailed="@{networkState}" />
+            showWhenFailed="@{networkState}" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

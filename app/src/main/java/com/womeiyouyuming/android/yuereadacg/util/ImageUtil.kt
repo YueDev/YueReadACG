@@ -21,7 +21,7 @@ import kotlinx.coroutines.*
 //fileName：   图片名称，会查重
 //showResult： 存储结果的sam函数，主线程
 
-fun savePhotoWithBitmap(context: Context, bitmap: Bitmap, fileName: String, showResult: (result: String) -> Unit) {
+fun savePhotoWithBitmap(context: Context, bitmap: Bitmap, fileName: String, isPNG: Boolean, showResult: (result: String) -> Unit) {
 
     MainScope().launch {
 
@@ -48,6 +48,12 @@ fun savePhotoWithBitmap(context: Context, bitmap: Bitmap, fileName: String, show
         //API29以上，设置IS_PENDING状态为1，这样存储结束前，其他应用就不会处理这张图片
         val values = ContentValues().apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+            put(MediaStore.MediaColumns.MIME_TYPE, if (isPNG) "image/png" else "image/jpeg")
+
+            val time = System.currentTimeMillis()
+            put(MediaStore.Images.Media.DATE_ADDED, time / 1000)
+            put(MediaStore.Images.Media.DATE_MODIFIED, time / 1000)
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 put(MediaStore.Images.Media.IS_PENDING, 1)
             }

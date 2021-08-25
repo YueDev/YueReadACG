@@ -1,5 +1,6 @@
 package com.womeiyouyuming.android.yuereadacg.model
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
@@ -7,13 +8,25 @@ import java.io.Serializable
  */
 
 data class Anime(
+    @SerializedName("title")
     val title: String,
+    @SerializedName("url")
     val url: String,
+    @SerializedName("img")
     val img: String,
+    @SerializedName("time")
     val time: String,
+    @SerializedName("author")
     val author: String,
+    @SerializedName("content")
     val content: String,
+    @SerializedName("playlist")
     val playlist: List<Play>
 ) : Serializable
 
-data class Play(val url: String, val name: String) : Serializable
+data class Play(
+    @SerializedName("url")
+    val url: String,
+    @SerializedName("name")
+    val name: String
+) : Serializable

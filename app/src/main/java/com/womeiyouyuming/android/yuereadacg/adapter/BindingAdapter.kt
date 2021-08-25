@@ -11,7 +11,7 @@ import com.womeiyouyuming.android.yuereadacg.network.NetworkState
 /**
  * Created by Yue on 2020/1/10.
  */
-@BindingAdapter("app:imgUrl")
+@BindingAdapter("imgUrl")
 fun getImgFromUrl(imageView: ImageView, url: String?) {
 
     url ?: return
@@ -22,7 +22,7 @@ fun getImgFromUrl(imageView: ImageView, url: String?) {
 
 
 //Amlyu网站防盗链，因此需要加Headers请求头
-@BindingAdapter("app:imgUrlAmlyu")
+@BindingAdapter("imgUrlAmlyu")
 fun getImgFromAmlyu(imageView: ImageView, url: String?) {
 
     url ?: return
@@ -33,7 +33,7 @@ fun getImgFromAmlyu(imageView: ImageView, url: String?) {
 }
 
 
-@BindingAdapter("app:showWhenLoading")
+@BindingAdapter("showWhenLoading")
 fun showWhenLoading(view: View, networkState: NetworkState?) {
 
     view.visibility = if (networkState == NetworkState.LOADING) View.VISIBLE else View.GONE
@@ -41,7 +41,7 @@ fun showWhenLoading(view: View, networkState: NetworkState?) {
 }
 
 
-@BindingAdapter("app:showWhenFailed")
+@BindingAdapter("showWhenFailed")
 fun showWhenFailed(view: View, networkState: NetworkState?) {
 
     view.visibility = if (networkState == NetworkState.FAILED) View.VISIBLE else View.GONE

@@ -101,8 +101,8 @@ class AnimeFragment : Fragment() {
 
 
         val animeAdapter = AnimeAdapter(retry = { animeViewModel.retry() }, itemClick = {
-            val bundle = bundleOf("anime" to it)
-            findNavController().navigate(R.id.action_nav_anime_to_playActivity, bundle)
+//            val bundle = bundleOf("anime" to it)
+//            findNavController().navigate(R.id.action_nav_anime_to_playActivity, bundle)
         })
 
 
